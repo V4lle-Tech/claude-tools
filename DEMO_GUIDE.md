@@ -358,11 +358,10 @@ npm publish
 ## 📚 Documentación Completa
 
 - [README Principal](README.md) - Overview del workspace
-- [Workspace Structure](WORKSPACE_STRUCTURE.md) - Arquitectura detallada
-- [Migration Guide](MIGRATION_GUIDE.md) - Guía de migración
-- [Publishing Guide](scripts/publish.md) - Cómo publicar
+- [Publishing Guide](packages/statusline/scripts/publish.md) - Cómo publicar plugins
 - [Statusline README](packages/statusline/README.md) - Plugin statusline
 - [Context Analyzer README](packages/context-analyzer/README.md) - Plugin analyzer
+- [Workspace Rules](.claude/CLAUDE.md) - Reglas globales de desarrollo
 
 ---
 
