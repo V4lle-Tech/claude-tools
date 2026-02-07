@@ -5,7 +5,7 @@
  *
  * Usage:
  *   bun run install-plugin.ts <plugin-name>
- *   bun run install statusline
+ *   bun run plugin statusline
  */
 
 import { join } from 'path';

@@ -9,7 +9,7 @@
     "shared"
   ],
   "scripts": {
-    "install": "bun run tools/install-plugin.ts",
+    "plugin": "bun run tools/install-plugin.ts",
     "install:all": "bun run tools/install-all.ts",
     "build:all": "bun run tools/build-all.ts",
     "test:all": "bun run tools/test-all.ts",

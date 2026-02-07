@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2025-02-07
+
+### Fixed
+- **Critical Installation Bug** (Issue #1 - Phase 1)
+  - Renamed package.json "install" script to "plugin" to prevent conflict
+  - Bun was automatically executing "install" script during dependency installation
+  - This caused installation to fail when downloading and building from GitHub releases
+  - Users now run `bun run plugin <plugin-name>` instead of `bun run install <plugin-name>`
+  - Standalone installation scripts (install.sh/install.ps1) now work correctly
+
+### Changed
+- Updated README examples to use `bun run plugin` instead of `bun run install`
+
 ## [1.0.1] - 2025-02-07
 
 ### Added
@@ -165,7 +178,7 @@ bun install
 bun run install:all
 
 # Or install specific plugin
-bun run install statusline
+bun run plugin statusline
 ```
 
 ## Contributing
@@ -188,5 +201,7 @@ Developed with assistance from Claude Sonnet 4.5
 
 ---
 
-[Unreleased]: https://github.com/V4lle-Tech/claude-tools/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/V4lle-Tech/claude-tools/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/V4lle-Tech/claude-tools/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/V4lle-Tech/claude-tools/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/V4lle-Tech/claude-tools/releases/tag/v1.0.0

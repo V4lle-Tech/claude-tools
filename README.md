@@ -58,7 +58,7 @@ bun install
 bun run install:all
 
 # Or install a specific plugin
-bun run install statusline
+bun run plugin statusline
 ```
 
 ### Create a New Plugin
@@ -77,7 +77,7 @@ bun run scripts/install.ts
 
 # Or from workspace root
 cd ../..
-bun run install my-awesome-plugin
+bun run plugin my-awesome-plugin
 ```
 
 ## 📦 Available Plugins
@@ -109,8 +109,8 @@ Analyzes your context usage and provides:
 bun run list-plugins
 
 # Install a specific plugin
-bun run install <plugin-name>
-# Example: bun run install statusline
+bun run plugin <plugin-name>
+# Example: bun run plugin statusline
 
 # Install all plugins
 bun run install:all
