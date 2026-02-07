@@ -1,0 +1,76 @@
+/**
+ * Default configuration embedded in the code.
+ * This is used when the external config file cannot be found.
+ */
+
+import type { Config } from '../types/config';
+
+export const DEFAULT_CONFIG: Config = {
+  layout: {
+    type: 'multi-line',
+    lines: [
+      ['model', 'workspace', 'git-status'],
+      ['context-bar', 'cost-tracker', 'rate-limits'],
+    ],
+  },
+  widgets: {
+    model: {
+      enabled: true,
+      color: 'cyan',
+      format: '[{name}]',
+    },
+    workspace: {
+      enabled: true,
+      color: 'blue',
+      format: '📁 {name}',
+      showFullPath: false,
+    },
+    'git-status': {
+      enabled: true,
+      showBranch: true,
+      showAheadBehind: true,
+      showModified: true,
+      showStaged: true,
+      cacheTTL: 5,
+    },
+    'context-bar': {
+      enabled: true,
+      width: 10,
+      colors: {
+        low: 'green',
+        medium: 'yellow',
+        high: 'red',
+      },
+      thresholds: {
+        medium: 70,
+        high: 90,
+      },
+    },
+    'cost-tracker': {
+      enabled: true,
+      showDuration: true,
+      showCost: true,
+      format: '${cost} | ⏱️ {duration}',
+    },
+    'rate-limits': {
+      enabled: true,
+      show5Hour: true,
+      show7Day: true,
+      apiCacheTTL: 60,
+      colors: {
+        low: 'green',
+        medium: 'yellow',
+        high: 'red',
+      },
+    },
+  },
+  cache: {
+    directory: '/tmp/claude-statusline-cache',
+    cleanupOnStart: true,
+  },
+  debug: {
+    logErrors: false,
+    errorLogPath: '/tmp/statusline-error.log',
+    measurePerformance: false,
+  },
+};

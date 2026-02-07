@@ -1,0 +1,38 @@
+{
+  "model": {
+    "id": "claude-opus-4",
+    "display_name": "Opus"
+  },
+  "workspace": {
+    "current_dir": "/workspaces/claude-code-statusline",
+    "project_dir": "/workspaces/claude-code-statusline"
+  },
+  "cwd": "/workspaces/claude-code-statusline",
+  "session_id": "test-session-123",
+  "transcript_path": "/tmp/transcript.json",
+  "cost": {
+    "total_cost_usd": 0.15,
+    "total_duration_ms": 900000,
+    "total_api_duration_ms": 45000,
+    "total_lines_added": 250,
+    "total_lines_removed": 48
+  },
+  "context_window": {
+    "total_input_tokens": 120000,
+    "total_output_tokens": 50000,
+    "context_window_size": 200000,
+    "used_percentage": 85,
+    "remaining_percentage": 15,
+    "current_usage": {
+      "input_tokens": 120000,
+      "output_tokens": 50000,
+      "cache_creation_input_tokens": 10000,
+      "cache_read_input_tokens": 5000
+    }
+  },
+  "exceeds_200k_tokens": false,
+  "version": "1.0.0",
+  "output_style": {
+    "name": "default"
+  }
+}

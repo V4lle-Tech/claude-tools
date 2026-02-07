@@ -1,0 +1,11 @@
+[install]
+# Use bun's package manager
+production = false
+
+[test]
+# Use bun's test runner
+preload = ["./tests/setup.ts"]
+
+[run]
+# Bun runtime options - silent to avoid warnings in statusline output
+silent = true

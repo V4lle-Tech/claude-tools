@@ -1,0 +1,35 @@
+{
+  "name": "claude-code-statusline",
+  "version": "1.0.0",
+  "description": "Real-time statusline for Claude Code with token usage and rate limits monitoring",
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "claude-statusline": "src/index.ts"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --compile --outfile=claude-statusline",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "install:statusline": "bun run scripts/install.ts",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "statusline",
+    "monitoring",
+    "tokens",
+    "bun"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "bun": ">=1.0.0"
+  }
+}

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+bun.lockb
+
+# Build output
+dist/
+*.js
+*.d.ts
+*.map
+claude-statusline
+
+# Cache
+.cache/
+/tmp/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.local
+.env.*.local
