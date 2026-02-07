@@ -1,0 +1,21 @@
+{
+  "name": "@claude-tools/context-analyzer",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "context-analyzer": "src/index.ts"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --compile --outfile=context-analyzer",
+    "test": "bun test",
+    "install": "bun run scripts/install.ts"
+  },
+  "dependencies": {
+    "@claude-tools/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest"
+  }
+}
