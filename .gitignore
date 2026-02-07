@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+bun.lockb
+
+# Build output
+dist/
+*.js
+*.d.ts
+*.map
+packages/*/dist/
+packages/*/*.js.map
+packages/*/node_modules/
+
+# Binaries
+packages/*/statusline
+packages/*/context-analyzer
+packages/**/claude-*
+!packages/*/src/**/*.ts
+
+# Cache
+.cache/
+/tmp/
+*.log
+/tmp/claude-*-cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.tsbuildinfo

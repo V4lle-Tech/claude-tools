@@ -1,0 +1,36 @@
+{
+  "name": "claude-tools",
+  "version": "1.0.0",
+  "description": "Professional suite of tools and plugins for Claude Code",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "shared"
+  ],
+  "scripts": {
+    "install": "bun run tools/install-plugin.ts",
+    "install:all": "bun run tools/install-all.ts",
+    "build:all": "bun run tools/build-all.ts",
+    "test:all": "bun run tools/test-all.ts",
+    "create-plugin": "bun run tools/scaffold.ts",
+    "clean": "rm -rf packages/*/dist packages/*/node_modules shared/node_modules",
+    "dev": "bun run --watch",
+    "list-plugins": "bun run tools/list-plugins.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "tools",
+    "plugins",
+    "statusline",
+    "hooks"
+  ],
+  "author": "",
+  "license": "MIT"
+}
