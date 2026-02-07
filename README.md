@@ -11,6 +11,12 @@ This workspace contains multiple plugins and tools that extend Claude Code's fun
 | **statusline** | Real-time status display with tokens, git, and metrics | ✅ Production |
 | **context-analyzer** | Context usage analysis with recommendations | ✅ Demo |
 
+### 📸 Statusline in Action
+
+![Claude Code Statusline](docs/statusline.png)
+
+Real-time display showing model, workspace, git status, context usage, cost tracking, and rate limits.
+
 ## 🚀 Quick Start
 
 ### Install All Plugins
