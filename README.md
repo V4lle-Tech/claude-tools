@@ -17,7 +17,7 @@ This workspace contains multiple plugins and tools that extend Claude Code's fun
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/claude-tools.git
+git clone https://github.com/V4lle-Tech/claude-tools.git
 cd claude-tools
 
 # Install dependencies
@@ -177,9 +177,11 @@ bun run install
 
 ## 🎓 Documentation
 
-- [Workspace Structure](WORKSPACE_STRUCTURE.md) - Detailed architecture
-- [Migration Guide](MIGRATION_GUIDE.md) - Migrating existing projects
-- [Publishing Guide](scripts/publish.md) - Publishing to npm
+- [Demo Guide](DEMO_GUIDE.md) - Workspace tutorial and examples
+- [Changelog](CHANGELOG.md) - Version history and release notes
+- [Publishing Guide](packages/statusline/scripts/publish.md) - Publishing plugins to npm
+- [Global Rules](.claude/CLAUDE.md) - Development guidelines and standards
+- Plugin-specific docs in each `packages/*/README.md`
 
 ## 🤝 Contributing
 
@@ -191,9 +193,11 @@ Contributions are welcome! Please:
 4. Add tests
 5. Submit a pull request
 
+See [CHANGELOG.md](CHANGELOG.md) for version history.
+
 ## 📝 License
 
-MIT License - see LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
