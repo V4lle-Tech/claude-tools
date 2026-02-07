@@ -161,11 +161,20 @@ build_binary() {
 
     # Install dependencies and build
     log_step "Installing dependencies..."
-    bun install >/dev/null 2>&1 || true
+    if ! bun install >/dev/null 2>&1; then
+        log_warning "Dependency installation had warnings (continuing anyway)"
+    fi
 
     log_step "Building binary..."
     cd "packages/$plugin"
-    bun run build >/dev/null 2>&1
+
+    # Build and capture output in case of error
+    local build_output
+    if ! build_output=$(bun run build 2>&1); then
+        log_error "Build failed:"
+        echo "$build_output" >&2
+        return 1
+    fi
 
     # Find the binary
     local binary_path
@@ -177,6 +186,8 @@ build_binary() {
 
     if [ ! -f "$binary_path" ]; then
         log_error "Binary not found after build: $binary_path"
+        log_info "Build output was:"
+        echo "$build_output" >&2
         return 1
     fi
 
