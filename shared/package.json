@@ -1,0 +1,15 @@
+{
+  "name": "@claude-tools/shared",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared utilities and types for Claude Tools plugins",
+  "exports": {
+    "./types": "./types/index.ts",
+    "./utils": "./utils/index.ts",
+    "./widgets": "./widgets/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest"
+  }
+}
