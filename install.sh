@@ -22,25 +22,25 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Logging functions
+# Logging functions (write to stderr to not interfere with return values)
 log_info() {
-    echo -e "${BLUE}ℹ${NC}  $1"
+    echo -e "${BLUE}ℹ${NC}  $1" >&2
 }
 
 log_success() {
-    echo -e "${GREEN}✓${NC}  $1"
+    echo -e "${GREEN}✓${NC}  $1" >&2
 }
 
 log_warning() {
-    echo -e "${YELLOW}⚠${NC}  $1"
+    echo -e "${YELLOW}⚠${NC}  $1" >&2
 }
 
 log_error() {
-    echo -e "${RED}✗${NC}  $1"
+    echo -e "${RED}✗${NC}  $1" >&2
 }
 
 log_step() {
-    echo -e "${CYAN}▸${NC}  $1"
+    echo -e "${CYAN}▸${NC}  $1" >&2
 }
 
 # Detect OS
@@ -204,7 +204,7 @@ install_binary() {
         if [[ ":$PATH:" != *":$install_dir:"* ]]; then
             log_warning "~/.local/bin is not in PATH"
             log_info "Add this to your ~/.bashrc or ~/.zshrc:"
-            echo "    export PATH=\"\$HOME/.local/bin:\$PATH\""
+            echo "    export PATH=\"\$HOME/.local/bin:\$PATH\"" >&2
         fi
     fi
 
