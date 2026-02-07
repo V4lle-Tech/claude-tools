@@ -19,7 +19,32 @@ Real-time display showing model, workspace, git status, context usage, cost trac
 
 ## 🚀 Quick Start
 
-### Install All Plugins
+### One-Line Installation (Recommended)
+
+Install plugins without cloning the repository:
+
+**Linux/macOS:**
+```bash
+# Install statusline plugin
+curl -fsSL https://raw.githubusercontent.com/V4lle-Tech/claude-tools/main/install.sh | bash
+
+# Or install a specific plugin
+curl -fsSL https://raw.githubusercontent.com/V4lle-Tech/claude-tools/main/install.sh | bash -s statusline
+```
+
+**Windows (PowerShell):**
+```powershell
+# Install statusline plugin
+powershell -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/V4lle-Tech/claude-tools/main/install.ps1 | iex"
+```
+
+The installer will:
+- ✅ Detect your OS and architecture
+- ✅ Download and build the plugin
+- ✅ Install to your PATH
+- ✅ Configure Claude Code automatically
+
+### Install from Source (For Contributors)
 
 ```bash
 # Clone the repository
@@ -31,16 +56,9 @@ bun install
 
 # Install all plugins
 bun run install:all
-```
 
-### Install a Specific Plugin
-
-```bash
-# Install just the statusline plugin
+# Or install a specific plugin
 bun run install statusline
-
-# Or the context analyzer
-bun run install context-analyzer
 ```
 
 ### Create a New Plugin
