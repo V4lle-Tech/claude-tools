@@ -40,6 +40,25 @@ echo "=== Checking structure ==="
 ls -la packages/
 ls -la packages/statusline/
 
+# Check if bun is installed
+echo "=== Checking for bun ==="
+if ! command -v bun >/dev/null 2>&1; then
+    echo "Bun not in PATH, checking ~/.bun/bin..."
+    if [ -f "$HOME/.bun/bin/bun" ]; then
+        echo "Found bun at ~/.bun/bin/bun, adding to PATH"
+        export BUN_INSTALL="$HOME/.bun"
+        export PATH="$BUN_INSTALL/bin:$PATH"
+    else
+        echo "Bun not found. Installing Bun..."
+        curl -fsSL https://bun.sh/install | bash
+        export BUN_INSTALL="$HOME/.bun"
+        export PATH="$BUN_INSTALL/bin:$PATH"
+    fi
+fi
+
+echo "Using bun: $(which bun)"
+bun --version
+
 # Install dependencies
 echo "=== Installing dependencies ==="
 bun install

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2025-02-07
+
+### Fixed
+- **Bun PATH Resolution** (Issue #1 - Phase 2)
+  - Fixed `install.sh` to detect bun installed at `~/.bun/bin` but not in PATH
+  - Script now automatically adds bun to PATH if found in standard location
+  - Prevents unnecessary bun reinstallation attempts
+  - Resolves "command not found" errors during standalone installation
+- **Binary Path Resolution**
+  - Fixed relative vs absolute path issue in `build_binary()` function
+  - Binary paths now correctly resolved as absolute paths
+  - Installation to `~/.local/bin` now works reliably
+
 ## [1.0.2] - 2025-02-07
 
 ### Fixed

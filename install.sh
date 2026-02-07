@@ -150,13 +150,22 @@ build_binary() {
     fi
 
     cd "$extracted_dir"
+    # Get absolute path after cd
+    extracted_dir=$(pwd)
 
     # Check if bun is installed
     if ! command -v bun >/dev/null 2>&1; then
-        log_warning "Bun not found. Installing Bun..."
-        curl -fsSL https://bun.sh/install | bash
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
+        # Check if bun exists in standard location but not in PATH
+        if [ -f "$HOME/.bun/bin/bun" ]; then
+            log_info "Found bun at ~/.bun/bin, adding to PATH..."
+            export BUN_INSTALL="$HOME/.bun"
+            export PATH="$BUN_INSTALL/bin:$PATH"
+        else
+            log_warning "Bun not found. Installing Bun..."
+            curl -fsSL https://bun.sh/install | bash
+            export BUN_INSTALL="$HOME/.bun"
+            export PATH="$BUN_INSTALL/bin:$PATH"
+        fi
     fi
 
     # Install dependencies and build
