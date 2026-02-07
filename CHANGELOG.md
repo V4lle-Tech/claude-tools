@@ -8,8 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- MIT License file
-- This CHANGELOG file
+- **Standalone Installation Scripts** (Issue #1 - Phase 1)
+  - `install.sh`: One-line installation for Linux/macOS
+    - Auto-detects OS and architecture
+    - Downloads and builds from source
+    - Configures Claude Code automatically
+    - Installs to PATH with proper permissions
+  - `install.ps1`: PowerShell installation script for Windows
+    - Similar functionality for Windows users
+    - Automatic PATH configuration
+    - User-friendly colored output
+  - Updated installation documentation in README
+  - Users can now install without cloning repository
+
+### Changed
+- README installation section reorganized
+  - One-line installation now recommended method
+  - Repository cloning moved to "For Contributors" section
 
 ## [1.0.0] - 2025-02-07
 
