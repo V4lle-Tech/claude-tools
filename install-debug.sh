@@ -4,7 +4,7 @@
 set -ex  # Exit on error and print commands
 
 REPO="V4lle-Tech/claude-tools"
-VERSION="v1.0.1"
+VERSION="v1.0.2"
 PLUGIN="statusline"
 
 echo "=== Starting debug installation ==="
