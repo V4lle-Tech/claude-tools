@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2025-02-07
+
 ### Added
 - **Standalone Installation Scripts** (Issue #1 - Phase 1)
   - `install.sh`: One-line installation for Linux/macOS
@@ -20,11 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - User-friendly colored output
   - Updated installation documentation in README
   - Users can now install without cloning repository
+- Visual preview image (docs/statusline.png)
 
 ### Changed
 - README installation section reorganized
   - One-line installation now recommended method
   - Repository cloning moved to "For Contributors" section
+
+### Fixed
+- Installation script logging interference (stderr redirection)
+- Build error handling and output display in install.sh
+- Proper error messages when build fails
 
 ## [1.0.0] - 2025-02-07
 
