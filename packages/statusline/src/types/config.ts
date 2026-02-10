@@ -55,6 +55,14 @@ export interface RateLimitsWidgetConfig extends WidgetConfig {
   colors: ColorConfig;
 }
 
+export interface SubagentWidgetConfig extends WidgetConfig {
+  showTokens: boolean;
+  showModel: boolean;
+  showElapsedTime: boolean;
+  tokenCacheTTL: number;
+  maxAgentsDetailed: number;
+}
+
 export interface LayoutConfig {
   type: 'single-line' | 'multi-line';
   lines: string[][];
@@ -80,6 +88,7 @@ export interface Config {
     'context-bar': ContextBarWidgetConfig;
     'cost-tracker': CostTrackerWidgetConfig;
     'rate-limits': RateLimitsWidgetConfig;
+    subagents: SubagentWidgetConfig;
   };
   cache: CacheConfig;
   debug: DebugConfig;

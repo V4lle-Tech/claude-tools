@@ -30,11 +30,47 @@ async function install() {
     process.exit(1);
   }
 
-  console.log('✅ Binary compiled successfully\n');
+  console.log('✅ Statusline binary compiled successfully\n');
 
-  // Step 2: Get the absolute path to the binary
+  // Step 1b: Compile hook binaries
+  console.log('📦 Compiling hook binaries...');
+  const hookStartProc = Bun.spawn(
+    ['bun', 'build', 'src/hooks/subagent-start.ts', '--compile', '--outfile=claude-subagent-start'],
+    {
+      cwd: import.meta.dir + '/..',
+      stdout: 'inherit',
+      stderr: 'inherit',
+    }
+  );
+
+  if ((await hookStartProc.exited) !== 0) {
+    console.error('❌ Failed to compile SubagentStart hook');
+    process.exit(1);
+  }
+
+  const hookStopProc = Bun.spawn(
+    ['bun', 'build', 'src/hooks/subagent-stop.ts', '--compile', '--outfile=claude-subagent-stop'],
+    {
+      cwd: import.meta.dir + '/..',
+      stdout: 'inherit',
+      stderr: 'inherit',
+    }
+  );
+
+  if ((await hookStopProc.exited) !== 0) {
+    console.error('❌ Failed to compile SubagentStop hook');
+    process.exit(1);
+  }
+
+  console.log('✅ Hook binaries compiled successfully\n');
+
+  // Step 2: Get the absolute paths to binaries
   const binPath = join(import.meta.dir, '..', 'claude-statusline');
-  console.log(`📍 Binary location: ${binPath}\n`);
+  const hookStartPath = join(import.meta.dir, '..', 'claude-subagent-start');
+  const hookStopPath = join(import.meta.dir, '..', 'claude-subagent-stop');
+  console.log(`📍 Statusline binary: ${binPath}`);
+  console.log(`📍 SubagentStart hook: ${hookStartPath}`);
+  console.log(`📍 SubagentStop hook: ${hookStopPath}\n`);
 
   // Step 3: Create config directory
   const configDir = join(homedir(), '.config', 'claude-statusline');
@@ -68,6 +104,36 @@ async function install() {
     padding: 2,
   };
 
+  // Step 5b: Register subagent hooks (using new matcher-based format)
+  if (!settings.hooks) {
+    settings.hooks = {};
+  }
+
+  if (!Array.isArray(settings.hooks.SubagentStart)) {
+    settings.hooks.SubagentStart = [];
+  }
+  if (!Array.isArray(settings.hooks.SubagentStop)) {
+    settings.hooks.SubagentStop = [];
+  }
+
+  // Remove any previously registered hooks from this plugin
+  settings.hooks.SubagentStart = settings.hooks.SubagentStart.filter(
+    (h: any) => !h.hooks?.some((hook: any) => hook.command?.includes('claude-subagent-start'))
+  );
+  settings.hooks.SubagentStop = settings.hooks.SubagentStop.filter(
+    (h: any) => !h.hooks?.some((hook: any) => hook.command?.includes('claude-subagent-stop'))
+  );
+
+  // Add fresh hook entries with matcher format (empty string for lifecycle events)
+  settings.hooks.SubagentStart.push({
+    matcher: '',
+    hooks: [{ type: 'command', command: hookStartPath }],
+  });
+  settings.hooks.SubagentStop.push({
+    matcher: '',
+    hooks: [{ type: 'command', command: hookStopPath }],
+  });
+
   // Step 6: Write back settings
   try {
     await Bun.write(settingsPath, JSON.stringify(settings, null, 2));
@@ -82,7 +148,8 @@ async function install() {
   console.log('Next steps:');
   console.log('  1. Restart Claude Code or start a new session');
   console.log('  2. Your statusline will appear at the bottom');
-  console.log(`  3. Customize widgets in ${configDir}/config.json`);
+  console.log('  3. Subagent tracking hooks are registered (SubagentStart/SubagentStop)');
+  console.log(`  4. Customize widgets in ${configDir}/config.json`);
   console.log('\nTest the statusline:');
   console.log('  bun run scripts/test-manual.ts full\n');
   console.log('Documentation:');

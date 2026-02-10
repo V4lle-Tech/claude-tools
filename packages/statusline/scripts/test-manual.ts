@@ -12,6 +12,8 @@
  */
 
 import { join } from 'path';
+import { writeState } from '../src/utils/subagent-state';
+import type { SubagentState } from '../src/utils/subagent-state';
 
 const scenarios = {
   minimal: {
@@ -77,6 +79,40 @@ const scenarios = {
     output_style: { name: 'default' },
   },
 
+  subagents: {
+    model: { display_name: 'Opus', id: 'claude-opus-4' },
+    context_window: {
+      used_percentage: 50,
+      total_input_tokens: 100000,
+      total_output_tokens: 40000,
+      context_window_size: 200000,
+      remaining_percentage: 50,
+      current_usage: {
+        input_tokens: 100000,
+        output_tokens: 40000,
+        cache_creation_input_tokens: 8000,
+        cache_read_input_tokens: 4000,
+      },
+    },
+    workspace: {
+      current_dir: '/workspaces/my-project',
+      project_dir: '/workspaces/my-project',
+    },
+    cwd: '/workspaces/my-project',
+    cost: {
+      total_cost_usd: 0.35,
+      total_duration_ms: 600000,
+      total_api_duration_ms: 30000,
+      total_lines_added: 300,
+      total_lines_removed: 80,
+    },
+    session_id: 'test-session-subagents',
+    transcript_path: '/tmp/transcript.json',
+    exceeds_200k_tokens: false,
+    version: '1.0.0',
+    output_style: { name: 'default' },
+  },
+
   'high-context': {
     model: { display_name: 'Sonnet', id: 'claude-sonnet-4' },
     context_window: {
@@ -123,6 +159,31 @@ async function main() {
   }
 
   console.log(`\n=== Testing Scenario: ${scenarioName} ===\n`);
+
+  // Set up mock subagent state for subagents scenario
+  if (scenarioName === 'subagents') {
+    const mockState: SubagentState = {
+      active: [
+        {
+          agent_id: 'agent-001',
+          agent_type: 'Explore',
+          model: 'Haiku',
+          started_at: Date.now() - 45000, // 45 seconds ago
+          session_id: 'test-session-subagents',
+        },
+        {
+          agent_id: 'agent-002',
+          agent_type: 'Plan',
+          model: 'Sonnet',
+          started_at: Date.now() - 20000, // 20 seconds ago
+          session_id: 'test-session-subagents',
+        },
+      ],
+      last_updated: Date.now(),
+    };
+    await writeState(mockState);
+    console.log('📝 Created mock subagent state file\n');
+  }
 
   const startTime = performance.now();
 

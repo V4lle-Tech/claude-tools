@@ -16,6 +16,7 @@ A high-performance, real-time statusline for Claude Code that displays token usa
 - ⏱️ **Session Metrics**: Cost tracking and duration display
 - 🌿 **Git Integration**: Branch name with staged/modified file indicators
 - 📈 **Rate Limits**: 5-hour and 7-day API usage monitoring
+- ⚡ **Subagent Monitoring**: Track active subagents with model info and token usage
 - 🚀 **High Performance**: < 50ms render time with aggressive caching
 - 💰 **Low Cost**: ~$0.02 per 8-hour session through smart caching
 
@@ -24,6 +25,7 @@ A high-performance, real-time statusline for Claude Code that displays token usa
 ```
 [Opus] | 📁 my-project | 🌿 main +3 ~5
 ██████░░░░ 60% | $0.25 | ⏱️ 30m | 5h: 45% | 7d: 23%
+⚡ 2 agents (45s) | Explore:Haiku 8K | Plan:Sonnet 4K
 ```
 
 **Legend:**
@@ -37,6 +39,9 @@ A high-performance, real-time statusline for Claude Code that displays token usa
 - `⏱️ 30m`: Session duration
 - `5h: 45%`: 5-hour rate limit usage
 - `7d: 23%`: 7-day rate limit usage
+- `⚡ 2 agents`: 2 active subagents
+- `(45s)`: Elapsed time since first agent started
+- `Explore:Haiku 8K`: Agent type, model, and token count
 
 ## Installation
 
@@ -121,7 +126,8 @@ Create `~/.config/claude-statusline/config.json` to override defaults:
     "type": "multi-line",
     "lines": [
       ["model", "workspace", "git-status"],
-      ["context-bar", "cost-tracker", "rate-limits"]
+      ["context-bar", "cost-tracker", "rate-limits"],
+      ["subagents"]
     ]
   },
   "widgets": {
@@ -140,6 +146,14 @@ Create `~/.config/claude-statusline/config.json` to override defaults:
     "rate-limits": {
       "enabled": true,
       "apiCacheTTL": 120
+    },
+    "subagents": {
+      "enabled": true,
+      "showTokens": true,
+      "showModel": true,
+      "showElapsedTime": true,
+      "tokenCacheTTL": 3,
+      "maxAgentsDetailed": 4
     }
   }
 }
@@ -155,6 +169,7 @@ Create `~/.config/claude-statusline/config.json` to override defaults:
 | `cost-tracker` | Session cost and duration | Instant |
 | `git-status` | Git branch and file counts | Cached 5s |
 | `rate-limits` | API usage limits | Cached 60s |
+| `subagents` | Active subagent monitoring with token tracking | Cached 3s |
 
 ### Widget Options
 
@@ -200,6 +215,27 @@ Create `~/.config/claude-statusline/config.json` to override defaults:
   "apiCacheTTL": 60
 }
 ```
+
+#### Subagents Widget
+```json
+{
+  "enabled": true,
+  "showTokens": true,
+  "showModel": true,
+  "showElapsedTime": true,
+  "tokenCacheTTL": 3,
+  "maxAgentsDetailed": 4
+}
+```
+
+**Options:**
+- `showTokens`: Display token usage per agent (parsed from transcript JSONL files)
+- `showModel`: Show agent model name (e.g., Haiku, Sonnet, Opus)
+- `showElapsedTime`: Display elapsed time since first agent started
+- `tokenCacheTTL`: Cache duration in seconds for token parsing (default: 3s)
+- `maxAgentsDetailed`: Maximum agents to show with details; additional agents shown as "+N more" (default: 4)
+
+**Note:** The subagents widget only appears when subagents are active. It displays on line 3 (if using multi-line layout) and disappears automatically when all agents complete.
 
 ## Architecture
 

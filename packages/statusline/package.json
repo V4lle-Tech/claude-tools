@@ -8,7 +8,8 @@
     "claude-statusline": "src/index.ts"
   },
   "scripts": {
-    "build": "bun build src/index.ts --compile --outfile=claude-statusline",
+    "build": "bun build src/index.ts --compile --outfile=claude-statusline && bun run build:hooks",
+    "build:hooks": "bun build src/hooks/subagent-start.ts --compile --outfile=claude-subagent-start && bun build src/hooks/subagent-stop.ts --compile --outfile=claude-subagent-stop",
     "dev": "bun run src/index.ts",
     "test": "bun test",
     "test:watch": "bun test --watch",

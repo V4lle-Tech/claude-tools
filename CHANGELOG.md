@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+#### Subagent Monitoring System
+- **Subagents Widget**: Real-time monitoring of active Claude Code subagents
+  - Displays agent count, elapsed time, model info, and token usage
+  - Dynamic third statusline (appears only when subagents are active)
+  - Configurable display options: showTokens, showModel, showElapsedTime
+  - Overflow handling: shows "+N more" when exceeding maxAgentsDetailed
+  - Example: `⚡ 2 agents (45s) | Explore:Haiku 8K | Plan:Sonnet 4K`
+- **Hook System**: Event-driven architecture for process monitoring
+  - `claude-subagent-start`: Hook binary called when subagents start
+  - `claude-subagent-stop`: Hook binary called when subagents stop
+  - Atomic state file at `/tmp/claude-subagent-state.json`
+- **JSONL Token Parser**: Extract token usage from subagent transcripts
+  - Parses JSONL transcript files for input/output token counts
+  - File modification time-based cache invalidation
+  - Configurable cache TTL (default: 3 seconds)
+  - Smart token formatting (8192 → "8K", 1048576 → "1M")
+- **Subagent State Management**: Persistent tracking of active agents
+  - Atomic file operations prevent corruption
+  - Tracks agent_id, agent_type, model, transcript_path, started_at
+  - Automatic cleanup on agent completion
+- **Comprehensive Test Suite**:
+  - Unit tests for SubagentWidget, SubagentState, and JSONLParser
+  - 488 lines of tests covering edge cases and error handling
+  - Mock fixtures for testing different agent scenarios
+
+### Changed
+- Build process now compiles three binaries:
+  - `claude-statusline` (main statusline renderer)
+  - `claude-subagent-start` (hook binary)
+  - `claude-subagent-stop` (hook binary)
+- Default layout expanded to three lines (third line for subagents widget)
+- Installation script updated to set up hook binaries
+
 ## [1.0.3] - 2025-02-07
 
 ### Fixed

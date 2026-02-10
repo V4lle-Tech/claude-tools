@@ -20,6 +20,7 @@ import { WorkspaceWidget } from '../widgets/workspace';
 import { CostTrackerWidget } from '../widgets/cost-tracker';
 import { GitStatusWidget } from '../widgets/git-status';
 import { RateLimitsWidget } from '../widgets/rate-limits';
+import { SubagentWidget } from '../widgets/subagents';
 
 export class LayoutEngine {
   private readonly config: Config;
@@ -78,6 +79,11 @@ export class LayoutEngine {
         'rate-limits',
         new RateLimitsWidget(this.config.widgets['rate-limits'], this.cache)
       );
+    }
+
+    // Subagents widget
+    if (this.config.widgets.subagents?.enabled) {
+      this.widgets.set('subagents', new SubagentWidget(this.config.widgets.subagents, this.cache));
     }
   }
 

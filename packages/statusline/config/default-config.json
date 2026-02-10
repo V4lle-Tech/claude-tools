@@ -3,7 +3,8 @@
     "type": "multi-line",
     "lines": [
       ["model", "workspace", "git-status"],
-      ["context-bar", "cost-tracker", "rate-limits"]
+      ["context-bar", "cost-tracker", "rate-limits"],
+      ["subagents"]
     ]
   },
   "widgets": {
@@ -55,6 +56,14 @@
         "medium": "yellow",
         "high": "red"
       }
+    },
+    "subagents": {
+      "enabled": true,
+      "showTokens": true,
+      "showModel": true,
+      "showElapsedTime": true,
+      "tokenCacheTTL": 3,
+      "maxAgentsDetailed": 4
     }
   },
   "cache": {

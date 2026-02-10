@@ -58,7 +58,7 @@ export class SettingsUpdater {
   }
 
   /**
-   * Add a hook to settings
+   * Add a hook to settings (uses new matcher-based format).
    */
   async addHook(hookName: string, command: string): Promise<void> {
     const settings = await this.readSettings();
@@ -67,10 +67,14 @@ export class SettingsUpdater {
       settings.hooks = {};
     }
 
-    settings.hooks[hookName] = {
-      type: 'command',
-      command,
-    };
+    if (!Array.isArray(settings.hooks[hookName])) {
+      settings.hooks[hookName] = [];
+    }
+
+    settings.hooks[hookName].push({
+      matcher: '',
+      hooks: [{ type: 'command', command }],
+    });
 
     await this.writeSettings(settings);
   }

@@ -11,6 +11,7 @@ export const DEFAULT_CONFIG: Config = {
     lines: [
       ['model', 'workspace', 'git-status'],
       ['context-bar', 'cost-tracker', 'rate-limits'],
+      ['subagents'],
     ],
   },
   widgets: {
@@ -62,6 +63,14 @@ export const DEFAULT_CONFIG: Config = {
         medium: 'yellow',
         high: 'red',
       },
+    },
+    subagents: {
+      enabled: true,
+      showTokens: true,
+      showModel: true,
+      showElapsedTime: true,
+      tokenCacheTTL: 3,
+      maxAgentsDetailed: 4,
     },
   },
   cache: {
